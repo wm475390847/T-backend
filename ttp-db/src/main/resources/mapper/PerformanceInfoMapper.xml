@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaohu.qa.ttp.db.dao.PerformanceInfoMapper">
+    <resultMap id="BaseResultMap" type="com.chaohu.qa.ttp.db.po.PerformanceInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="performance_name" jdbcType="VARCHAR" property="performanceName"/>
+        <result column="request_data"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler" property="requestData"/>
+        <result column="thread_data"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler" property="threadData"/>
+        <result column="jmx_path" jdbcType="VARCHAR" property="jmxPath"/>
+        <result column="execute_time" jdbcType="TIMESTAMP" property="executeTime"/>
+        <result column="elapsed_time" jdbcType="BIGINT" property="elapsedTime"/>
+        <result column="deleted" jdbcType="BOOLEAN" property="deleted"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , performance_name, request_data, thread_data, jmx_path, execute_time, elapsed_time,
+    deleted, `status`, gmt_create, gmt_modified
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from performance_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from performance_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.chaohu.qa.ttp.db.po.PerformanceInfo"
+            useGeneratedKeys="true">
+        insert into performance_info (performance_name, request_data, thread_data,
+                                      jmx_path, execute_time, elapsed_time,
+                                      deleted, `status`, gmt_create,
+                                      gmt_modified)
+        values (#{performanceName,jdbcType=VARCHAR},
+                #{requestData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},
+                #{threadData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},
+                #{jmxPath,jdbcType=VARCHAR}, #{executeTime,jdbcType=TIMESTAMP}, #{elapsedTime,jdbcType=BIGINT},
+                #{deleted,jdbcType=BOOLEAN}, #{status,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
+                #{gmtModified,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.chaohu.qa.ttp.db.po.PerformanceInfo"
+            useGeneratedKeys="true">
+        insert into performance_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="performanceName != null">
+                performance_name,
+            </if>
+            <if test="requestData != null">
+                request_data,
+            </if>
+            <if test="threadData != null">
+                thread_data,
+            </if>
+            <if test="jmxPath != null">
+                jmx_path,
+            </if>
+            <if test="executeTime != null">
+                execute_time,
+            </if>
+            <if test="elapsedTime != null">
+                elapsed_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="performanceName != null">
+                #{performanceName,jdbcType=VARCHAR},
+            </if>
+            <if test="requestData != null">
+                #{requestData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},
+            </if>
+            <if test="threadData != null">
+                #{threadData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},
+            </if>
+            <if test="jmxPath != null">
+                #{jmxPath,jdbcType=VARCHAR},
+            </if>
+            <if test="executeTime != null">
+                #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="elapsedTime != null">
+                #{elapsedTime,jdbcType=BIGINT},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=BOOLEAN},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.chaohu.qa.ttp.db.po.PerformanceInfo">
+        update performance_info
+        <set>
+            <if test="performanceName != null">
+                performance_name = #{performanceName,jdbcType=VARCHAR},
+            </if>
+            <if test="requestData != null">
+                request_data =
+                #{requestData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},
+            </if>
+            <if test="threadData != null">
+                thread_data = #{threadData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},
+            </if>
+            <if test="jmxPath != null">
+                jmx_path = #{jmxPath,jdbcType=VARCHAR},
+            </if>
+            <if test="executeTime != null">
+                execute_time = #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="elapsedTime != null">
+                elapsed_time = #{elapsedTime,jdbcType=BIGINT},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=BOOLEAN},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.chaohu.qa.ttp.db.po.PerformanceInfo">
+        update performance_info
+        set performance_name = #{performanceName,jdbcType=VARCHAR},
+            request_data     = #{requestData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},
+            thread_data      = #{threadData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},
+            jmx_path         = #{jmxPath,jdbcType=VARCHAR},
+            execute_time     = #{executeTime,jdbcType=TIMESTAMP},
+            elapsed_time     = #{elapsedTime,jdbcType=BIGINT},
+            deleted          = #{deleted,jdbcType=BOOLEAN},
+            `status`         = #{status,jdbcType=INTEGER},
+            gmt_create       = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified     = #{gmtModified,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

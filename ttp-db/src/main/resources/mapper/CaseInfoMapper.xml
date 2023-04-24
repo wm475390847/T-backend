@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaohu.qa.ttp.db.dao.CaseInfoMapper">
+    <resultMap id="BaseResultMap" type="com.chaohu.qa.ttp.db.po.CaseInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="case_name" jdbcType="VARCHAR" property="caseName"/>
+        <result column="case_owner" jdbcType="VARCHAR" property="caseOwner"/>
+        <result column="case_result" jdbcType="BOOLEAN" property="caseResult"/>
+        <result column="case_reason" jdbcType="VARCHAR" property="caseReason"/>
+        <result column="case_desc" jdbcType="VARCHAR" property="caseDesc"/>
+        <result column="api_json" jdbcType="VARCHAR" property="apiJson"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="execute_time" jdbcType="TIMESTAMP" property="executeTime"/>
+        <result column="env" jdbcType="VARCHAR" property="env"/>
+        <result column="ci_job_id" jdbcType="BIGINT" property="ciJobId"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , case_name, case_owner, case_result, case_reason, case_desc, api_json, product_id,
+    execute_time, env, ci_job_id, gmt_create, gmt_modified
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from case_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from case_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.chaohu.qa.ttp.db.po.CaseInfo"
+            useGeneratedKeys="true">
+        insert into case_info (case_name, case_owner, case_result,
+                               case_reason, case_desc, api_json,
+                               product_id, execute_time, env,
+                               ci_job_id, gmt_create, gmt_modified)
+        values (#{caseName,jdbcType=VARCHAR}, #{caseOwner,jdbcType=VARCHAR}, #{caseResult,jdbcType=BOOLEAN},
+                #{caseReason,jdbcType=VARCHAR}, #{caseDesc,jdbcType=VARCHAR}, #{apiJson,jdbcType=VARCHAR},
+                #{productId,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP}, #{env,jdbcType=VARCHAR},
+                #{ciJobId,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.chaohu.qa.ttp.db.po.CaseInfo"
+            useGeneratedKeys="true">
+        insert into case_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="caseName != null">
+                case_name,
+            </if>
+            <if test="caseOwner != null">
+                case_owner,
+            </if>
+            <if test="caseResult != null">
+                case_result,
+            </if>
+            <if test="caseReason != null">
+                case_reason,
+            </if>
+            <if test="caseDesc != null">
+                case_desc,
+            </if>
+            <if test="apiJson != null">
+                api_json,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="executeTime != null">
+                execute_time,
+            </if>
+            <if test="env != null">
+                env,
+            </if>
+            <if test="ciJobId != null">
+                ci_job_id,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="caseName != null">
+                #{caseName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseOwner != null">
+                #{caseOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="caseResult != null">
+                #{caseResult,jdbcType=BOOLEAN},
+            </if>
+            <if test="caseReason != null">
+                #{caseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="caseDesc != null">
+                #{caseDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="apiJson != null">
+                #{apiJson,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="env != null">
+                #{env,jdbcType=VARCHAR},
+            </if>
+            <if test="ciJobId != null">
+                #{ciJobId,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.chaohu.qa.ttp.db.po.CaseInfo">
+        update case_info
+        <set>
+            <if test="caseName != null">
+                case_name = #{caseName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseOwner != null">
+                case_owner = #{caseOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="caseResult != null">
+                case_result = #{caseResult,jdbcType=BOOLEAN},
+            </if>
+            <if test="caseReason != null">
+                case_reason = #{caseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="caseDesc != null">
+                case_desc = #{caseDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="apiJson != null">
+                api_json = #{apiJson,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                execute_time = #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="env != null">
+                env = #{env,jdbcType=VARCHAR},
+            </if>
+            <if test="ciJobId != null">
+                ci_job_id = #{ciJobId,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.chaohu.qa.ttp.db.po.CaseInfo">
+        update case_info
+        set case_name    = #{caseName,jdbcType=VARCHAR},
+            case_owner   = #{caseOwner,jdbcType=VARCHAR},
+            case_result  = #{caseResult,jdbcType=BOOLEAN},
+            case_reason  = #{caseReason,jdbcType=VARCHAR},
+            case_desc    = #{caseDesc,jdbcType=VARCHAR},
+            api_json     = #{apiJson,jdbcType=VARCHAR},
+            product_id   = #{productId,jdbcType=INTEGER},
+            execute_time = #{executeTime,jdbcType=TIMESTAMP},
+            env          = #{env,jdbcType=VARCHAR},
+            ci_job_id    = #{ciJobId,jdbcType=BIGINT},
+            gmt_create   = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>
